@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 
 
 const UserForm = (props) => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+
+    const initialValues = {
+        username: '',
+        email: '',
+        password:''
+    }
+
+    const [datos, setDatos] = useState(initialValues);
+    const { username, email, password } = datos;
 
     const createUser = (e) => {
         e.preventDefault();
@@ -12,25 +18,28 @@ const UserForm = (props) => {
         console.log("Welcome", newUser);
     };
 
-    const limpiar = () =>{
-        setUsername("");
-        setEmail("");
-        setPassword("");
+    const limpiar = () => setDatos(initialValues);
+
+    const handleInputs = (e) =>{
+        setDatos({
+            ...datos,
+            [e.target.name] : e.target.value,
+        });
     }
 
     return (
         <form onSubmit={createUser}>
             <div>
                 <label>Username: </label>
-                <input value={username} type="text" onChange={(e) => setUsername(e.target.value)} />
+                <input value={username} name="username" type="text" onChange={handleInputs} />
             </div>
             <div>
                 <label>Email Address: </label>
-                <input value={email} type="text" onChange={(e) => setEmail(e.target.value)} />
+                <input value={email} name="email" type="text" onChange={handleInputs} />
             </div>
             <div>
                 <label>Password: </label>
-                <input value={password} type="text" onChange={(e) => setPassword(e.target.value)} />
+                <input value={password} name="password" type="text" onChange={handleInputs} />
             </div>
             <input type="submit" value="Create User" />
             <button type="button" onClick={limpiar}>Limpiar</button>
