@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ComponentePruebaFlecha from './components/ComponentePruebaFlecha';
+import Ejercicio from './components/Ejercicio';
+import UserForm from './components/UserForm';
 
-function App() {
+const App = () => {
+
+  const [contador, setContador] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Formulario</h1>
+      <UserForm />
+      <hr />
+      <h1>Hola</h1>
+      <ComponentePruebaFlecha contador={contador} setContador={setContador} nombre="Francisco" apellido="Boisier" edad={37}>
+        <p>Esto es un parrafo enviado como contenido. Es decir Children</p>
+      </ComponentePruebaFlecha>
+      <Ejercicio />
     </div>
   );
 }
