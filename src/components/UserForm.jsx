@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useForm from '../hooks/useForm';
 
 
 const UserForm = (props) => {
@@ -6,26 +7,18 @@ const UserForm = (props) => {
     const initialValues = {
         username: '',
         email: '',
-        password:''
+        password:'',
+        edad: 20,
     }
-
-    const [datos, setDatos] = useState(initialValues);
-    const { username, email, password } = datos;
+    const [datos, handleInputs, limpiar ] = useForm(initialValues);
+    
+    const { username, email, password, edad } = datos;
 
     const createUser = (e) => {
         e.preventDefault();
-        const newUser = { username, email, password };
+        const newUser = { username, email, password, edad };
         console.log("Welcome", newUser);
     };
-
-    const limpiar = () => setDatos(initialValues);
-
-    const handleInputs = (e) =>{
-        setDatos({
-            ...datos,
-            [e.target.name] : e.target.value,
-        });
-    }
 
     return (
         <form onSubmit={createUser}>
@@ -40,6 +33,10 @@ const UserForm = (props) => {
             <div>
                 <label>Password: </label>
                 <input value={password} name="password" type="text" onChange={handleInputs} />
+            </div>
+            <div>
+                <label>Edad: </label>
+                <input value={edad} name="edad" type="number" onChange={handleInputs} />
             </div>
             <input type="submit" value="Create User" />
             <button type="button" onClick={limpiar}>Limpiar</button>
