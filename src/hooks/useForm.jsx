@@ -6,14 +6,13 @@ const useForm = (initialValues={}) => {
   const limpiar = () => setDatos(initialValues);
 
   const handleInputs = (e) =>{
-      console.log(e.target.type)
       setDatos({
           ...datos,
-          [e.target.name] : e.target.value,
+          [e.target.name] : { valor:e.target.value, error:'' },
       });
   }
 
-  return [datos, handleInputs, limpiar];
+  return [datos,setDatos, handleInputs, limpiar];
 }
 
 export default useForm
